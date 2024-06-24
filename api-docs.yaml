@@ -1,0 +1,135 @@
+openapi: 3.0.1
+info:
+  title: BANKING ATM
+  version: v1
+servers:
+  - url: http://localhost:1111/v1/account
+    description: Account server url
+paths:
+  # Account endpoints
+  /:
+    post:
+      tags:
+        - Account-controller
+      operationId: addAccount
+      summary: Create account
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Account'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Account'
+  /withdraw:
+    put:
+      tags:
+        - Account-controller
+      operationId: withdraw
+      summary: Withdraw cash
+      parameters:
+        - name: AccountNo
+          in: query
+          required: true
+          schema:
+            type: integer
+          description: Account number of user
+        - name: Amount
+          in: query
+          required: true
+          schema:
+            type: integer
+          description: Amount to be withdrawn
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Account'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  balance:
+                    type: integer
+                    description: Balance of user.
+
+  /deposit:
+    put:
+      tags:
+        - Account-controller
+      operationId: deposit
+      summary: Deposit cash
+      parameters:
+        - name: AccountNo
+          in: query
+          required: true
+          schema:
+            type: integer
+          description: Account number of user
+        - name: Amount
+          in: query
+          required: true
+          schema:
+            type: integer
+          description: Amount to be deposited
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Account'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  balance:
+                    type: integer
+                    description: Balance of user.
+
+  /{accountNo}:
+    get:
+      tags:
+        - Account-controller
+      operationId: getBalance
+      summary: Check balance
+      parameters:
+        - name: accountNo
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Account'
+
+components:
+  schemas:
+    Account:
+      type: object
+      properties:
+        accountNo:
+          type: integer
+          format: int32
+        balance:
+          type: number
+        customerId:
+          type: integer
+          format: int32

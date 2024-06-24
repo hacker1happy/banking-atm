@@ -1,0 +1,24 @@
+server:
+  port: 1111
+  servlet:
+    context-path: /v1/account
+
+spring:
+  application:
+    name: Account-Service
+  datasource:
+    url: jdbc:mysql://localhost:3306/atm?createDatabaseIfNotExist=true
+    username: root
+    password: root
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+
+logging:
+  file:
+    name: src/main/resources/static/logfile.txt

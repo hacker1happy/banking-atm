@@ -1,0 +1,20 @@
+server:
+  port: 8001
+  servlet:
+    context-path: /v1/account
+
+spring:
+  application:
+    name: Account-Service
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+
+logging:
+  file:
+    name: src/main/resources/static/logfile.txt
